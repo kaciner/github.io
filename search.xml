@@ -38,8 +38,8 @@
 </tbody></table>
 <p>这几个命令平时用的比较多</p>
 <h4 id="修改主题"><a href="#修改主题" class="headerlink" title="修改主题"></a>修改主题</h4><p>一般来说，主题都会自己配置一个，Hexo现在提供282个主题，<a href="https://hexo.io/themes/" target="_blank" rel="noopener">主题地址</a>，Hexo默认的主题是landscape,我这里用了使用人数最多的hexo-theme-next主题（我个人觉得autumn主题也不错）。博客在本地能跑起来之后，接下来就是去修改主题，首先定位到你的Hexo站点目录下<code>cd blog/</code>，然后把主题文件克隆到你的<code>./themes</code>目录<code>git clone https://github.com/iissnan/hexo-theme-next themes/next</code>，这个目录下原本有一个landscape文件夹，里边放的默认的样式，当然开发者也可以直接将主题文件下载好拷贝进去，但我还是建议你使用克隆最新版本的方式，因为之后的更新可以通过 git pull 来快速更新， 而不用再次下载压缩包替换。<br>克隆成功后，修改hexo的_config.yml文件，也就是站点配置文件，将主题修改为next，如下：<br><code>theme: next</code>，到此，NexT 主题安装完成。下一步我们将验证主题是否正确启用。在切换主题之后、验证之前，我们最好使用<code>hexo clean</code>来清除Hexo的缓存。之后执行如下命令，即可看到最新的主题效果。<br><code>hexo g</code><br><code>hexo s</code></p>
-<h4 id="绑定到GitHub"><a href="#绑定到GitHub" class="headerlink" title="绑定到GitHub"></a>绑定到GitHub</h4><p>博客光自己看怎么能行，我们选择把博客绑定到GitHub上，首先以<code>自己的GitHub ID . github . io</code>为名创建一个public仓库，例如我的ID为Kaciner，创建的仓库如下：<br><img src="/.com//WX20191222-155057@2x.png" alt></p>
-<img src="/.com//12/22/%E5%A6%82%E4%BD%95%E7%94%A8Mac%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/WX20191222-155057@2x.png" class>
+<h4 id="绑定到GitHub"><a href="#绑定到GitHub" class="headerlink" title="绑定到GitHub"></a>绑定到GitHub</h4><p>博客光自己看怎么能行，我们选择把博客绑定到GitHub上，首先以<code>自己的GitHub ID . github . io</code>为名创建一个public仓库，例如我的ID为Kaciner，创建的仓库如下：</p>
+<img src="/.io//12/22/%E5%A6%82%E4%BD%95%E7%94%A8Mac%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/WX20191222-155057@2x.png" class>
 
 ]]></content>
       <categories>
