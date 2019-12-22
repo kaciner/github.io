@@ -86,8 +86,11 @@
 <meta property="og:site_name" content="风之旅人">
 <meta property="og:description" content="今天是2020年考研的最后一天，我从今天开始写自己的博客了，为自己学习的知识找个仓库存放，不断积累。">
 <meta property="og:image" content="https://kaciner.github.io/2019/12/22/%E5%A6%82%E4%BD%95%E7%94%A8Mac%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/WX20191222-155057@2x.png">
+<meta property="og:image" content="https://kaciner.github.io/2019/12/22/%E5%A6%82%E4%BD%95%E7%94%A8Mac%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/WX20191222-161604@2x.png">
+<meta property="og:image" content="https://kaciner.github.io/2019/12/22/%E5%A6%82%E4%BD%95%E7%94%A8Mac%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/WX20191222-161856@2x.png">
+<meta property="og:image" content="https://kaciner.github.io/2019/12/22/%E5%A6%82%E4%BD%95%E7%94%A8Mac%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/WX20191222-161947@2x.png">
 <meta property="article:published_time" content="2019-12-22T06:53:45.000Z">
-<meta property="article:modified_time" content="2019-12-22T07:58:53.347Z">
+<meta property="article:modified_time" content="2019-12-22T08:21:43.685Z">
 <meta property="article:author" content="风之旅人">
 <meta property="article:tag" content="博客">
 <meta name="twitter:card" content="summary">
@@ -394,7 +397,18 @@
 <h4 id="修改主题"><a href="#修改主题" class="headerlink" title="修改主题"></a>修改主题</h4><p>一般来说，主题都会自己配置一个，Hexo现在提供282个主题，<a href="https://hexo.io/themes/" target="_blank" rel="noopener">主题地址</a>，Hexo默认的主题是landscape,我这里用了使用人数最多的hexo-theme-next主题（我个人觉得autumn主题也不错）。博客在本地能跑起来之后，接下来就是去修改主题，首先定位到你的Hexo站点目录下<code>cd blog/</code>，然后把主题文件克隆到你的<code>./themes</code>目录<code>git clone https://github.com/iissnan/hexo-theme-next themes/next</code>，这个目录下原本有一个landscape文件夹，里边放的默认的样式，当然开发者也可以直接将主题文件下载好拷贝进去，但我还是建议你使用克隆最新版本的方式，因为之后的更新可以通过 git pull 来快速更新， 而不用再次下载压缩包替换。<br>克隆成功后，修改hexo的_config.yml文件，也就是站点配置文件，将主题修改为next，如下：<br><code>theme: next</code>，到此，NexT 主题安装完成。下一步我们将验证主题是否正确启用。在切换主题之后、验证之前，我们最好使用<code>hexo clean</code>来清除Hexo的缓存。之后执行如下命令，即可看到最新的主题效果。<br><code>hexo g</code><br><code>hexo s</code></p>
 <h4 id="绑定到GitHub"><a href="#绑定到GitHub" class="headerlink" title="绑定到GitHub"></a>绑定到GitHub</h4><p>博客光自己看怎么能行，我们选择把博客绑定到GitHub上，首先以<code>自己的GitHub ID . github . io</code>为名创建一个public仓库，例如我的ID为Kaciner，创建的仓库如下：</p>
 <img src="/2019/12/22/%E5%A6%82%E4%BD%95%E7%94%A8Mac%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/WX20191222-155057@2x.png" class>
-
+<p>创建成功之后，修改hexo的<code>_config.yml</code>文件，配置GitHub地址，如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:kaciner&#x2F;kaciner.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<p>这里根据自己的地址来配置即可，配置完成后，执行如下命令<br><code>hexo g</code><br><code>hexo d</code><br>执行完成后，就可以将数据上传到GitHub了（当然在这之前如果你没配置过GitHub公钥甚至没有GitHub账号，需要先参考GitHub官方文档<a href="https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh" target="_blank" rel="noopener">配置远程仓库</a>），上传成功后，访问<code>https://kaciner.github.io</code>就可以看到自己的个人站点了。如果你对GitHub提供的域名不是特别满意，也可以自己申请一个域名，分分钟就配置好了。</p>
+<h4 id="申请域名"><a href="#申请域名" class="headerlink" title="申请域名"></a>申请域名</h4><p>域名申请建议使用国外的域名提供商，不需要备案，我这里用的是.cn的域名，还得备案（哭了），我参考的大佬使用的是godaddy，因为是新加坡的域名服务商，还支持支付宝付款。</p>
+<h4 id="域名和GitHub绑定"><a href="#域名和GitHub绑定" class="headerlink" title="域名和GitHub绑定"></a>域名和GitHub绑定</h4><h5 id="GitHub配置"><a href="#GitHub配置" class="headerlink" title="GitHub配置"></a>GitHub配置</h5><p>首先在博客所在目录下的 source 目录中，创建一个 CNAME 文件，文件内容就是你的域名，如下：</p>
+<img src="/2019/12/22/%E5%A6%82%E4%BD%95%E7%94%A8Mac%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/WX20191222-161604@2x.png" class>
+<p>然后执行 <code>hexo d</code> 命令将这个文件上传到 GitHub就可以了。</p>
+<h4 id="域名解析设置"><a href="#域名解析设置" class="headerlink" title="域名解析设置"></a>域名解析设置</h4><p>域名解析这块，可以使用DNSPod去做域名解析，也可以使用godaddy自己提供的域名解析。我这里用的是DNSPod，所以首先要做的，就是修改godaddy提供的域名解析服务，登录自己的godaddy账号，找到域名管理，修改域名解析<br>服务为 DNSPod ，如下：</p>
+<img src="/2019/12/22/%E5%A6%82%E4%BD%95%E7%94%A8Mac%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/WX20191222-161856@2x.png" class>
+<p>然后登录到 DNSPod（没有账号注册一个），然后添加自己的域名解析，如下图：</p>
+<img src="/2019/12/22/%E5%A6%82%E4%BD%95%E7%94%A8Mac%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/WX20191222-161947@2x.png" class>
+<p>添加两条 A 记录，指向 GitHub 的 IP 地址，再添加一条 CNAME ，指向你的 GitHub 域名就可以了。<br>如此之后，大功告成！</p>
 
       
     </div>
@@ -565,7 +579,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#今天是2020年考研的最后一天，我从今天开始写自己的博客了，为自己学习的知识找个仓库存放，不断积累。"><span class="nav-number">1.</span> <span class="nav-text">今天是2020年考研的最后一天，我从今天开始写自己的博客了，为自己学习的知识找个仓库存放，不断积累。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#准备工作"><span class="nav-number">1.1.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#博客搭建"><span class="nav-number">1.1.1.</span> <span class="nav-text">博客搭建</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改主题"><span class="nav-number">1.2.</span> <span class="nav-text">修改主题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#绑定到GitHub"><span class="nav-number">1.3.</span> <span class="nav-text">绑定到GitHub</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#今天是2020年考研的最后一天，我从今天开始写自己的博客了，为自己学习的知识找个仓库存放，不断积累。"><span class="nav-number">1.</span> <span class="nav-text">今天是2020年考研的最后一天，我从今天开始写自己的博客了，为自己学习的知识找个仓库存放，不断积累。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#准备工作"><span class="nav-number">1.1.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#博客搭建"><span class="nav-number">1.1.1.</span> <span class="nav-text">博客搭建</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改主题"><span class="nav-number">1.2.</span> <span class="nav-text">修改主题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#绑定到GitHub"><span class="nav-number">1.3.</span> <span class="nav-text">绑定到GitHub</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#申请域名"><span class="nav-number">1.4.</span> <span class="nav-text">申请域名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#域名和GitHub绑定"><span class="nav-number">1.5.</span> <span class="nav-text">域名和GitHub绑定</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#GitHub配置"><span class="nav-number">1.5.1.</span> <span class="nav-text">GitHub配置</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#域名解析设置"><span class="nav-number">1.6.</span> <span class="nav-text">域名解析设置</span></a></li></ol></li></ol></div>
             
 
           </div>
