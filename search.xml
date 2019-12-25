@@ -1,6 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>SpringBoot配置文件和静态资源</title>
+    <url>/2019/12/25/SpringBoot%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90/</url>
+    <content><![CDATA[<h3 id="SpringBoot配置文件和静态资源的存放位置和加载顺序"><a href="#SpringBoot配置文件和静态资源的存放位置和加载顺序" class="headerlink" title="SpringBoot配置文件和静态资源的存放位置和加载顺序"></a>SpringBoot配置文件和静态资源的存放位置和加载顺序</h3><a id="more"></a>
+<h4 id="SpringBoot加载配置文件优先级顺序"><a href="#SpringBoot加载配置文件优先级顺序" class="headerlink" title="SpringBoot加载配置文件优先级顺序"></a>SpringBoot加载配置文件优先级顺序</h4><p>SpringBoot启动会扫描以下位置的application.properties或者application.yml作为默认的配置文件</p>
+<ol>
+<li>工程根目录:./config/</li>
+<li>工程根目录:./</li>
+<li>classpath:/config/</li>
+<li>classpath:/</li>
+</ol>
+<p>加载的优先级顺序是从上向下加载，并且所有的文件都会被加载，高优先级的内容会覆盖掉优先级低的内容，形成互补配置。<br>注: </p>
+<ol>
+<li>如果同一个目录下，有application.yml也有application.properties，默认先读取application.properties。</li>
+<li>如果同一个配置属性，在多个配置文件都配置了，默认使用第1个读取到的，后面读取的不覆盖前面读取到的。</li>
+<li>创建SpringBoot项目时，一般的配置文件放置在项目的resources目录下，因为配置文件的修改，通过热部署不用重新启动项目，而热部署的作用范围是classpath下</li>
+</ol>
+<h4 id="配置随机值"><a href="#配置随机值" class="headerlink" title="配置随机值"></a>配置随机值</h4><p>roncoo.secret={random.value} roncoo.number={random.int}<br>roncoo.bignumber={random.long} roncoo.number.less.than.ten={random.int(10)}<br>roncoo.number.in.range=${random.int[1024,65536]}<br>读取使用注解：@Value(value = “${roncoo.secret}”)<br>注：出现黄点提示，是要提示配置元数据，可以不配置</p>
+<h4 id="其他配置的介绍"><a href="#其他配置的介绍" class="headerlink" title="其他配置的介绍"></a>其他配置的介绍</h4><p>端口配置<br>server.port=8080<br>时间格式化<br>spring.jackson.date-format=yyyy-MM-dd HH:mm:ss<br>时区设置<br>spring.jackson.time-zone=Asia/Shanghai</p>
+<h4 id="SpringBoot加载静态资源优先级顺序"><a href="#SpringBoot加载静态资源优先级顺序" class="headerlink" title="SpringBoot加载静态资源优先级顺序"></a>SpringBoot加载静态资源优先级顺序</h4><p>在SpringBoot中，新创建的项目中，资源默认都会存放在resources/static目录。<br>在默认情况下，一共有5个位置可以放静态资源，五个路径分别是如下五个：</p>
+<ol>
+<li>classpath:/MATA-INF/resources/</li>
+<li>classpath:/resources/</li>
+<li>classpath:/static/</li>
+<li>classpath:/public/</li>
+<li>/</li>
+</ol>
+<p>第5个<code>/</code>的意思是在 Spring Boot 项目中，默认是没有 webapp 这个目录的，当然我们也可以自己添加（例如在需要使用JSP的时候），这里第5个<code>/</code>其实就是表示webapp目录中的静态资源也不被拦截。如果同一个文件分别出现在五个目录下，那么优先级也是按照上面列出的顺序。<br>不过，虽然有5个存储目录，除了第5个用的比较少之外，其他四个，系统默认创建了<code>classpath:/static/</code>，正常情况下，我们只需要将我们的静态资源放到这个目录下即可，也不需要额外去创建其他静态资源目录。</p>
+<h4 id="自定义配置"><a href="#自定义配置" class="headerlink" title="自定义配置"></a>自定义配置</h4><p>当然，这个是系统默认配置，如果我们并不想将资源放在系统默认的这五个位置上，也可以自定义静态资源位置和映射，自定义的方式也有两种，可以通过 application.properties 来定义，也可以在 Java 代码中来定义，下面分别来看。</p>
+<h5 id="application-properties"><a href="#application-properties" class="headerlink" title="application.properties"></a>application.properties</h5><p>在配置文件中定义的方式比较简单，如下：</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring.resources.static-locations</span>=classpath:/</span><br><span class="line"><span class="attr">spring.mvc.static-path-pattern</span>=/**</span><br></pre></td></tr></table></figure>
+<p>第一行配置表示定义资源位置，第二行配置表示定义请求URL规则。以上文的配置为例，如果我们这样定义了，表示可以将静态资源放在 resources目录下的任意地方，我们访问的时候当然也需要写完整的路径，例如在<code>resources/static</code>目录下有一张名为<code>1.png</code>的图片，那么访问路径就是<code>http://localhost:8080/static/1.png</code>，注意此时的static不能省略。</p>
+<h5 id="Java-代码定义"><a href="#Java-代码定义" class="headerlink" title="Java 代码定义"></a>Java 代码定义</h5><p>当然，在SpringBoot中我们也可以通过Java代码来自定义，方式和Java配置的SSM比较类似，如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebMVCConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addResourceHandlers</span><span class="params">(ResourceHandlerRegistry registry)</span> </span>&#123;</span><br><span class="line">        registry.addResourceHandler(<span class="string">"/**"</span>).addResourceLocations(<span class="string">"classpath:/aaa/"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>SpringBoot</category>
+      </categories>
+      <tags>
+        <tag>SpringBoot</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Vue环境搭建</title>
     <url>/2019/12/22/Vue%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
     <content><![CDATA[<h3 id="Vue的环境搭建以及NodeJS和npm"><a href="#Vue的环境搭建以及NodeJS和npm" class="headerlink" title="Vue的环境搭建以及NodeJS和npm"></a>Vue的环境搭建以及NodeJS和npm</h3><a id="more"></a>
@@ -45,8 +86,8 @@
   <entry>
     <title>如何用Mac搭建自己的博客</title>
     <url>/2019/12/22/%E5%A6%82%E4%BD%95%E7%94%A8Mac%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h2 id="今天是2020年考研的最后一天，我从今天开始写自己的博客了，为自己学习的知识找个地方存放，不断积累。"><a href="#今天是2020年考研的最后一天，我从今天开始写自己的博客了，为自己学习的知识找个地方存放，不断积累。" class="headerlink" title="今天是2020年考研的最后一天，我从今天开始写自己的博客了，为自己学习的知识找个地方存放，不断积累。"></a>今天是2020年考研的最后一天，我从今天开始写自己的博客了，为自己学习的知识找个地方存放，不断积累。</h2><a id="more"></a>
-<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><h4 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h4><p><strong>实际上现在搭建一个个人博客，可选方案有很多种，我参照江南一点雨的方式，用Hexo来搭建，使用Hexo需要提前在电脑上安装好Node和Git，安装成功后就可以开始Hexo的安装了。</strong><br>步骤如下：<br>1.安装Hexo<br><code>sudo npm install -g hexo-cli</code><br>2.在本地创建一个博客目录<br><code>sudo init blog</code><br>上面这个目录执行完后，会在本地创建一个blog目录，这里面就是独立博客所必须的一些文件，然后给目录一个权限。<br>3.给目录一个权限<br><code>sudo chmod -R 777 blog/</code><br>之后进入这个目录中，执行<code>npm install</code>命令，安装相关的依赖。<br>新建完成后，指定文件夹的目录如下：</p>
+    <content><![CDATA[<h3 id="今天是2020年考研的最后一天，我从今天开始写自己的博客了，为自己学习的知识找个地方存放，不断积累。"><a href="#今天是2020年考研的最后一天，我从今天开始写自己的博客了，为自己学习的知识找个地方存放，不断积累。" class="headerlink" title="今天是2020年考研的最后一天，我从今天开始写自己的博客了，为自己学习的知识找个地方存放，不断积累。"></a>今天是2020年考研的最后一天，我从今天开始写自己的博客了，为自己学习的知识找个地方存放，不断积累。</h3><a id="more"></a>
+<h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h4><h4 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h4><p><strong>实际上现在搭建一个个人博客，可选方案有很多种，我参照江南一点雨的方式，用Hexo来搭建，使用Hexo需要提前在电脑上安装好Node和Git，安装成功后就可以开始Hexo的安装了。</strong><br>步骤如下：<br>1.安装Hexo<br><code>sudo npm install -g hexo-cli</code><br>2.在本地创建一个博客目录<br><code>sudo init blog</code><br>上面这个目录执行完后，会在本地创建一个blog目录，这里面就是独立博客所必须的一些文件，然后给目录一个权限。<br>3.给目录一个权限<br><code>sudo chmod -R 777 blog/</code><br>之后进入这个目录中，执行<code>npm install</code>命令，安装相关的依赖。<br>新建完成后，指定文件夹的目录如下：</p>
 <figure class="highlight sqf"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── <span class="variable">_config</span>.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── <span class="variable">_drafts</span></span><br><span class="line">|   └── <span class="variable">_posts</span></span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure>
 <p>_config.yml这个文件是站点的配置文件，package.json是应用程序的信息，scaffolds是模版文件夹，themes是主题文件夹。<br>配置完成后，定位到blog目录<code>cd blog/</code>，执行<code>hexo s</code>就可以在本地启动项目了，启动成功后，在浏览器中输入<code>http://localhost:4000</code>或者按住command键点终端中的链接就可以看到网站了。<br>说到<code>hexo s</code>命令，这里还有几个常用命令，分别是：</p>
 <table>
