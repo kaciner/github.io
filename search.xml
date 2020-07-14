@@ -1,6 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>云计算的概念</title>
+    <url>/2020/07/14/%E4%BA%91%E8%AE%A1%E7%AE%97%E7%9A%84%E6%A6%82%E5%BF%B5/</url>
+    <content><![CDATA[<h3 id="Azure基础知识：云概念-云计算的原则"><a href="#Azure基础知识：云概念-云计算的原则" class="headerlink" title="Azure基础知识：云概念 - 云计算的原则"></a>Azure基础知识：云概念 - 云计算的原则</h3><a id="more"></a>
+<h4 id="什么是云计算"><a href="#什么是云计算" class="headerlink" title="什么是云计算"></a>什么是云计算</h4><p>云计算是指通过 Internet 提供的、使用即用即付定价模式的计算服务。 换句话说，它是一种从其他人的数据中心租用计算能力和存储的方法。</p>
+<h4 id="云计算的优势"><a href="#云计算的优势" class="headerlink" title="云计算的优势"></a>云计算的优势</h4><p>云计算让经营企业变得更加轻松。 云计算经济高效、可缩放、具有弹性、始终保持最新状态、可靠且安全。 这意味着你可以将更多时间花在重要事项上，而只需花较少时间来管理基础细节。</p>
+<h4 id="规模效益"><a href="#规模效益" class="headerlink" title="规模效益"></a>规模效益</h4><p>规模效益是指大规模运作时，能够较高效地或以较低的单位成本完成任务。 这种成本优势是云计算的一个重要优势。</p>
+<h4 id="资本支出-CapEx-与运营支出-OpEx"><a href="#资本支出-CapEx-与运营支出-OpEx" class="headerlink" title="资本支出 (CapEx) 与运营支出 (OpEx)"></a>资本支出 (CapEx) 与运营支出 (OpEx)</h4><ul>
+<li>资本支出 (CapEx)：CapEx 是预先将资金花在实体基础设施上，然后逐渐从税单中扣除这笔费用。 CapEx 是一种前期成本，其价值会随着时间的推移而降低。</li>
+</ul>
+<ol>
+<li>服务器成本</li>
+<li>存储成本</li>
+<li>网络成本</li>
+<li>备份和存档的成本</li>
+<li>组织连续性和灾难恢复成本</li>
+<li>数据中心基础设施成本</li>
+<li>技术人员</li>
+</ol>
+<ul>
+<li>运营支出 (OpEx)：OpEx 是现在花钱购买服务或产品，现在为其付费。 可以在同一年从税单中扣除此项费用。 无前期成本。 你可以在使用服务或产品时为其付费。</li>
+</ul>
+<ol>
+<li>租用软件和自定义功能</li>
+<li>根据使用/需求而不是固定硬件或容量来缩减费用</li>
+<li>在用户或组织级别计费</li>
+</ol>
+<h4 id="云计算的三种部署方法"><a href="#云计算的三种部署方法" class="headerlink" title="云计算的三种部署方法"></a>云计算的三种部署方法</h4><p>公有云、私有云和混合云</p>
+<h4 id="云服务的类型"><a href="#云服务的类型" class="headerlink" title="云服务的类型"></a>云服务的类型</h4><ul>
+<li>基础结构即服务 (IaaS)</li>
+<li>平台即服务 (PaaS)</li>
+<li>软件即服务 (SaaS)<br>管理职责<img src="/2020/07/14/%E4%BA%91%E8%AE%A1%E7%AE%97%E7%9A%84%E6%A6%82%E5%BF%B5/2020-07-14-%E4%BA%91%E8%AE%A1%E7%AE%97%E7%9A%84%E6%A6%82%E5%BF%B5.png" class>
+<img src="/2020/07/14/%E4%BA%91%E8%AE%A1%E7%AE%97%E7%9A%84%E6%A6%82%E5%BF%B5/WX20200714-233003@2x.png" class></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Azure</category>
+      </categories>
+      <tags>
+        <tag>Azure</tag>
+        <tag>云计算</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vuex</title>
+    <url>/2020/02/03/Vuex/</url>
+    <content><![CDATA[<h3 id="Vuex"><a href="#Vuex" class="headerlink" title="Vuex"></a>Vuex</h3><a id="more"></a>
+<p>打开终端 安装Vuex</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">npm <span class="keyword">install</span> vuex</span><br></pre></td></tr></table></figure>
+<p>导入vuex<br>在index.js文件中<code>import Vuex from &#39;vuex&#39;</code><br><code>Vue.use(vuex)</code></p>
+<p>写一个简单的例子</p>
+<figure class="highlight pf"><table><tr><td class="code"><pre><span class="line">export <span class="keyword">default</span> new Vuex.Store(&#123;</span><br><span class="line">  <span class="keyword">state</span>: &#123;</span><br><span class="line">    count: <span class="number">0</span></span><br><span class="line">  &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    increment (<span class="keyword">state</span>) &#123;</span><br><span class="line">      <span class="keyword">state</span>.count++</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  actions: &#123;</span><br><span class="line">    increment (context) &#123;</span><br><span class="line">      context.commit('increment')</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>在main.js里引入</p>
+<figure class="highlight clean"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">'./store'</span></span><br></pre></td></tr></table></figure>
+
+<p>启动项目</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line">npm <span class="keyword">run</span><span class="bash"> serve</span></span><br></pre></td></tr></table></figure>
+<p>打开项目首页 大功告成！<br><a href="http://localhost:8080/" target="_blank" rel="noopener">http://localhost:8080/</a></p>
+]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vue-cli构建Vue项目</title>
+    <url>/2020/02/03/Vue-cli%E6%9E%84%E5%BB%BAVue%E9%A1%B9%E7%9B%AE/</url>
+    <content><![CDATA[<h3 id="Vue-cli构建Vue项目"><a href="#Vue-cli构建Vue项目" class="headerlink" title="Vue-cli构建Vue项目"></a>Vue-cli构建Vue项目</h3><a id="more"></a>
+<h5 id="创建新的Vue项目"><a href="#创建新的Vue项目" class="headerlink" title="创建新的Vue项目"></a>创建新的Vue项目</h5><figure class="highlight isbl"><table><tr><td class="code"><pre><span class="line"><span class="variable">vue</span> <span class="variable">init</span> <span class="variable">webpack</span> <span class="function"><span class="title">vue01</span>(项目名)</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>按回车确认项目名或者在光标处修改，项目名不能以大写字母开头，不能包含特殊字符。</li>
+<li>项目描述 可以输入也可以直接回车确认</li>
+<li>作者 可以输入也可以直接回车确认</li>
+<li>项目创建方式 可以选择运行+编译或者运行</li>
+<li>是否安装vue-router 可以添加也可以在之后再手动添加</li>
+<li>是否添加ESlint 可以添加也可以不添加</li>
+<li>设置单元测试 可以添加也可以不添加</li>
+<li>e2e测试 可以添加也可以不添加</li>
+<li>是否需要运行npm或者yarn 可以运行也可以不运行</li>
+</ol>
+<p>创建好之后cd到项目目录里</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> vue01/</span><br></pre></td></tr></table></figure>
+<p>然后手动npm install</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">npm <span class="keyword">install</span></span><br></pre></td></tr></table></figure>
+<p>运行</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line">npm <span class="keyword">run</span><span class="bash"> dev</span></span><br></pre></td></tr></table></figure>
+<h5 id="使用Vue-cli创建Vue项目"><a href="#使用Vue-cli创建Vue项目" class="headerlink" title="使用Vue-cli创建Vue项目"></a>使用Vue-cli创建Vue项目</h5><p>打开终端 安装Vue-cli</p>
+<figure class="highlight coffeescript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">npm</span> install -g @vue/cli</span><br></pre></td></tr></table></figure>
+<p>查看版本</p>
+<figure class="highlight ada"><table><tr><td class="code"><pre><span class="line">vue <span class="comment">--version</span></span><br></pre></td></tr></table></figure>
+<p>创建项目</p>
+<figure class="highlight isbl"><table><tr><td class="code"><pre><span class="line"><span class="variable">vue</span> <span class="variable">create</span> <span class="function"><span class="title">vue01</span>(项目名)</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>选择编译工具</li>
+<li>router是否使用历史模式</li>
+<li>想在哪里配置</li>
+<li>是否保存为模版</li>
+</ol>
+<p>启动项目</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line">npm <span class="keyword">run</span><span class="bash"> serve</span></span><br></pre></td></tr></table></figure>
+<p>打开项目首页 大功告成！<br><a href="http://localhost:8080/" target="_blank" rel="noopener">http://localhost:8080/</a></p>
+]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SpringSecurity登录表单配置</title>
     <url>/2020/01/07/SpringSecurity%E7%99%BB%E5%BD%95%E8%A1%A8%E5%8D%95%E9%85%8D%E7%BD%AE/</url>
     <content><![CDATA[<h3 id="SpringSecurity登录表单配置"><a href="#SpringSecurity登录表单配置" class="headerlink" title="SpringSecurity登录表单配置"></a>SpringSecurity登录表单配置</h3><a id="more"></a>
