@@ -1,6 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>使用 Azure 创建 VM</title>
+    <url>/2020/07/15/%E4%BD%BF%E7%94%A8-Azure-%E5%88%9B%E5%BB%BA-VM/</url>
+    <content><![CDATA[<h3 id="使用-Azure-创建-VM"><a href="#使用-Azure-创建-VM" class="headerlink" title="使用 Azure 创建 VM"></a>使用 Azure 创建 VM</h3><a id="more"></a>
+<h3 id="在-Azure-中创建-Linux-虚拟机"><a href="#在-Azure-中创建-Linux-虚拟机" class="headerlink" title="在 Azure 中创建 Linux 虚拟机"></a>在 Azure 中创建 Linux 虚拟机</h3><h4 id="什么是-SSH？"><a href="#什么是-SSH？" class="headerlink" title="什么是 SSH？"></a>什么是 SSH？</h4><p>安全外壳 (SSH) 是一种加密的连接协议，它允许通过未受保护的连接进行安全登录。 通过 SSH，可以使用网络连接从远程位置连接到终端 shell。</p>
+<p>有两种可用于对 SSH 连接进行身份验证的方法：用户名和密码，或 SSH 密钥对。</p>
+<p>虽然 SSH 提供加密连接，但如果将密码用于 SSH 连接，VM 容易受到密码暴力破解攻击。 在使用 SSH 连接到 Linux VM 时，一种更安全且首选的方法是使用公钥/私钥对（也称为 SSH 密钥）。</p>
+<p>凭借 SSH 密钥对，无需密码即可登录到基于 Linux 的 Azure 虚拟机。 如果只计划从多台计算机登录到 VM，这是一种更安全的方法。 如果需要能够从不同位置访问 Linux VM，结合使用用户名和密码可能是更好的方法。 SSH 密钥对有两个部分：公钥和私钥。</p>
+<ul>
+<li><p>公钥放置在 Linux VM 上或者要对其使用公钥加密的任何其他服务中。 公钥可与任何人共享。</p>
+</li>
+<li><p>“私钥”是在建立 SSH 连接时为验证身份向 Linux VM 呈现的内容。 请考虑此机密信息，并像保护密码或任何其他专用数据一样保护此信息。</p>
+</li>
+</ul>
+<p>可使用同一个公钥/私钥对来访问多个 Azure VM 和服务。</p>
+<h4 id="创建-SSH-密钥对"><a href="#创建-SSH-密钥对" class="headerlink" title="创建 SSH 密钥对"></a>创建 SSH 密钥对</h4><p>在 Linux、Windows 10 和 macOS 上，可使用内置的 ssh-keygen 命令来生成 SSH 公钥和私钥文件。</p>
+<p>下面是为 Azure VM 生成密钥对所需的最低限度的命令。 此命令会创建一个 SSH 协议 2 (SSH-2) RSA 公钥-私钥对。 其最小长度为 2048 位，但对于本学习模块，我们将使用 4096 位的公钥-私钥对。</p>
+<p>将此命令复制到 Cloud Shell 中：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096</span><br></pre></td></tr></table></figure>
+
+<p>选择 Enter 键以接受默认位置。 此命令会在 <code>~/.ssh</code> 目录中创建两个文件：<code>id_rsa</code> 和 <code>id_rsa.pub</code>。 如果文件已存在，则将其覆盖。</p>
+<p>输入你会记住的密码。 使用 SSH 密钥访问 VM 时，需要使用此密码。</p>
+<p>可以使用各种选项来提供文件名或密码，以避免出现提示。</p>
+<h4 id="将-SSH-密钥对与-Azure-Linux-VM-一起使用"><a href="#将-SSH-密钥对与-Azure-Linux-VM-一起使用" class="headerlink" title="将 SSH 密钥对与 Azure Linux VM 一起使用"></a>将 SSH 密钥对与 Azure Linux VM 一起使用</h4><p>生成密钥对之后，可以将它与 Azure 中的 Linux VM 一起使用。 可以在创建 VM 期间提供公钥，也可以在创建 VM 后添加公钥。</p>
+<p>可以通过以下命令在 Azure Cloud Shell 中查看文件的内容：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
+
+<h4 id="将-SSH-密钥添加到现有的-Linux-VM"><a href="#将-SSH-密钥添加到现有的-Linux-VM" class="headerlink" title="将 SSH 密钥添加到现有的 Linux VM"></a>将 SSH 密钥添加到现有的 Linux VM</h4><p>如果已创建 VM，则可使用 ssh-copy-id 命令将公钥安装到 Linux VM 上。 一旦针对 SSH 授权该密钥后，它会在无需密码的情况下授予访问服务器的权限，但系统仍会提示提供密钥的通行短语（如果已设置）。</p>
+<p>例如，如果有一个名为 myserver 的 Linux VM，它有一个名为 azureuser 的用户，可以使用以下命令安装公钥文件并使用密钥为用户授权：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub azureuser@myserver</span><br></pre></td></tr></table></figure>
+
+<p>有了公钥后，我们便可切换到 Azure 门户并创建 Linux VM。</p>
+<h4 id="新建-Linux-虚拟机"><a href="#新建-Linux-虚拟机" class="headerlink" title="新建 Linux 虚拟机"></a>新建 Linux 虚拟机</h4><p>可以使用 Azure 门户、Azure CLI 或 Azure PowerShell 创建 Linux VM。 开始使用 Azure 时，最简单的方法是使用门户，因为它会指导你完成所需的信息，并在创建过程中提供提示和有用的消息：</p>
+<p>使用激活沙盒时所用的同一帐户登录到 Azure 门户 。</p>
+<p>在 Azure 门户菜单上或在门户主页中，选择“创建资源”。</p>
+<p>在搜索框中，输入“Ubuntu Server”。</p>
+<p>从列表中选择“Ubuntu Server 18.04 LTS Canonical”。</p>
+<p>单击“创建”按钮开始配置 VM。</p>
+<h4 id="配置-VM-的磁盘"><a href="#配置-VM-的磁盘" class="headerlink" title="配置 VM 的磁盘"></a>配置 VM 的磁盘</h4><p>单击“下一步:磁盘&gt;”转到“磁盘”部分。</p>
+<p>对于“OS 磁盘类型”，选择“高级 SSD”。</p>
+<p>创建数据磁盘</p>
+<h4 id="通过-SSH-连接到-VM"><a href="#通过-SSH-连接到-VM" class="headerlink" title="通过 SSH 连接到 VM"></a>通过 SSH 连接到 VM</h4><p>要通过 SSH 连接到 VM，需要：</p>
+<ul>
+<li>VM 的 公共 IP 地址</li>
+<li>VM 上的本地帐户的用户名</li>
+<li>在该帐户中配置的公钥</li>
+<li>对相应的私钥的访问权限</li>
+<li>在 VM 上打开端口 22</li>
+</ul>
+<p>之前，生成了 SSH 密钥对，并将公钥添加到 VM 配置中，并确保端口 22 已打开。</p>
+<p>下一个单元将使用此信息，使用 SSH 在 VM 上打开安全终端。</p>
+<p>终端打开后，可访问所有标准 Linux 命令行工具。</p>
+<p>接下来，让我们使用 SSH 连接到 VM。</p>
+<h4 id="使用-SSH-进行连接"><a href="#使用-SSH-进行连接" class="headerlink" title="使用 SSH 进行连接"></a>使用 SSH 进行连接</h4><p>首先需要获取 VM 的公共 IP 地址<br>在 Azure 门户 中，确保先前创建的虚拟机的“概述”面板已打开。 如果需要打开该 VM，可在“所有资源”下找到它。</p>
+<h4 id="将命令从剪贴板粘贴到-Azure-Cloud-Shell。-删除-i-标志和私钥路径占位符。-它看起来应该类似于以下示例，但具有不同的-IP-地址和用户名："><a href="#将命令从剪贴板粘贴到-Azure-Cloud-Shell。-删除-i-标志和私钥路径占位符。-它看起来应该类似于以下示例，但具有不同的-IP-地址和用户名：" class="headerlink" title="将命令从剪贴板粘贴到 Azure Cloud Shell。 删除 -i 标志和私钥路径占位符。 它看起来应该类似于以下示例，但具有不同的 IP 地址和用户名："></a>将命令从剪贴板粘贴到 Azure Cloud Shell。 删除 -i 标志和私钥路径占位符。 它看起来应该类似于以下示例，但具有不同的 IP 地址和用户名：</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh azureuser@13.68.150.164</span><br></pre></td></tr></table></figure>
+
+<p>第一次连接时，SSH 将要求对未知的主机进行身份验证。 SSH 会告知你之前从未连接到此服务器过。 如果事实如此，那么完全正常；你可以回答“是”，从而将服务器的指纹保存在已知的主机文件中：</p>
+<p>在适用于 Linux 的 shell 命令提示下，尝试执行几个 Linux 命令</p>
+<ul>
+<li>ls -la / 可显示磁盘根目录</li>
+<li>ps -l 可显示所有正在运行的进程</li>
+<li>dmesg 可列出所有内核消息</li>
+<li>lsblk 可列出所有块设备- 此处将显示驱动器</li>
+</ul>
+<p>在驱动器列表中，可观察到的最有趣的一点是缺少的内容。 请注意，数据驱动器 (sdc) 存在，但未安装到文件系统中。 Azure 添加了一个 VHD，但未对其进行初始化。</p>
+<h4 id="初始化数据磁盘"><a href="#初始化数据磁盘" class="headerlink" title="初始化数据磁盘"></a>初始化数据磁盘</h4><ol>
+<li>首先，标识磁盘。 我们已在前面执行了此操作。 还可以使用 <code>dmesg | grep SCSI</code>，它将列出来自 SCSI 设备的内核的所有消息。</li>
+<li>确定需要初始化的驱动器 <code>(sdc)</code> 后，可以使用 <code>fdisk</code> 执行此操作。 需要使用 <code>sudo</code> 运行命令，并提供要分区的磁盘。 可使用以下命令创建新的主分区:<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">(<span class="built_in">echo</span> n; <span class="built_in">echo</span> p; <span class="built_in">echo</span> 1; <span class="built_in">echo</span> ; <span class="built_in">echo</span> ; <span class="built_in">echo</span> w) | sudo fdisk /dev/sdc</span><br></pre></td></tr></table></figure></li>
+<li>接下来，需要使用 mkfs 命令将文件系统写入该分区。<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo mkfs -t ext4 /dev/sdc1`</span><br></pre></td></tr></table></figure></li>
+<li>最后，需要将驱动器安装到文件系统中。 假定有一个 data 文件夹。 我们来创建装入点文件夹并安装驱动器。<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo mkdir /data &amp;&amp; sudo mount /dev/sdc1 /data</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="将软件安装到-VM-上"><a href="#将软件安装到-VM-上" class="headerlink" title="将软件安装到 VM 上"></a>将软件安装到 VM 上</h4><h5 id="安装Apache-Web服务器"><a href="#安装Apache-Web服务器" class="headerlink" title="安装Apache Web服务器"></a>安装Apache Web服务器</h5><ol>
+<li>首先，更新本地包索引以反映最新的上游更改：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure></li>
+<li>接下来，安装 Apache：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install apache2 -y</span><br></pre></td></tr></table></figure></li>
+<li>它应自动启动 - 我们可使用 systemctl 检查状态：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo systemctl status apache2 --no-pager</span><br></pre></td></tr></table></figure>
+<code>systemctl</code>  命令返回的内容如下所示：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apache2.service - The Apache HTTP Server</span><br><span class="line">   Loaded: loaded (/lib/systemd/system/apache2.service; enabled; vendor preset: enabled)</span><br><span class="line">  Drop-In: /lib/systemd/system/apache2.service.d</span><br><span class="line">           └─apache2-systemd.conf</span><br><span class="line">   Active: active (running) since Mon 2018-09-03 21:00:03 UTC; 1min 34s ago</span><br><span class="line"> Main PID: 11156 (apache2)</span><br><span class="line">    Tasks: 55 (<span class="built_in">limit</span>: 4915)</span><br><span class="line">   CGroup: /system.slice/apache2.service</span><br><span class="line">           ├─11156 /usr/sbin/apache2 -k start</span><br><span class="line">           ├─11158 /usr/sbin/apache2 -k start</span><br><span class="line">           └─11159 /usr/sbin/apache2 -k start</span><br><span class="line"></span><br><span class="line"><span class="built_in">test</span>-web-eus-vm1 systemd[1]: Starting The Apache HTTP Server...</span><br><span class="line"><span class="built_in">test</span>-web-eus-vm1 apachectl[11129]: AH00558: apache2: Could not reliably determine the server<span class="string">'s fully qua</span></span><br><span class="line"><span class="string">test-web-eus-vm1 systemd[1]: Started The Apache HTTP Server.</span></span><br></pre></td></tr></table></figure></li>
+<li>最后，我们可以尝试通过公共 IP 地址检索默认页面。 但是，即使 Web 服务器在 VM 上运行，你也无法获得有效的连接或响应。<br>虚拟网络正在阻止入站请求。 我们可以通过配置对其进行更改。 接下来介绍允许入站请求。</li>
+</ol>
+<h4 id="在-Azure-VM-中打开端口"><a href="#在-Azure-VM-中打开端口" class="headerlink" title="在 Azure VM 中打开端口"></a>在 Azure VM 中打开端口</h4><p>默认情况下，新 VM 已被锁定。</p>
+<p>应用可以发出传出请求，但唯一允许的入站流量来自于虚拟网络（如同一本地网络上的其他资源），并且来自于 Azure 负载均衡器（探测检查）。</p>
+<p>分两步来调整配置，使其支持网络上的不同协议。 新建 VM 时，可打开几个常见端口（RDP、HTTP、HTTPS 和 SSH）。 但是，如果需要对防火墙进行其他更改，将需要手动进行调整。</p>
+<p>此操作的过程包括两个步骤：</p>
+<ol>
+<li><p>创建网络安全组。</p>
+</li>
+<li><p>创建允许所需端口上的流量的入站规则。</p>
+</li>
+</ol>
+<h4 id="更新网络接口上的-NSG"><a href="#更新网络接口上的-NSG" class="headerlink" title="更新网络接口上的 NSG"></a>更新网络接口上的 NSG</h4><p>端口 80 在应用于子网的 NSG 上打开。 但应用到网络接口的 NSG 阻止了 端口 80. 让我们解决这个问题，以便我们可以连接到网站。</p>
+<ol>
+<li><p>切换回虚拟机的“概览”面板。 可在“所有资源”下找到 VM。</p>
+</li>
+<li><p>在“设置”部分，选择“网络”项。</p>
+</li>
+<li><p>应该能在同一选项卡的上半部分看到子网的 NSG 规则，在下半部分看到网络接口的 NSG 规则。在下半部分，为网络接口的 NSG 规则选择“添加入站端口规则”。</p>
+</li>
+<li><p>选择“基本”。</p>
+</li>
+<li><p>对 HTTP 规则使用以下信息：</p>
+</li>
+<li><p>单击“添加”以创建规则。</p>
+</li>
+</ol>
+<h5 id="打开默认网页"><a href="#打开默认网页" class="headerlink" title="打开默认网页"></a>打开默认网页</h5><p>使用服务器的 IP 地址发出 HTTP 请求。 它现在应正常工作。</p>
+<h3 id="在-Azure-中创建-Windows-虚拟机"><a href="#在-Azure-中创建-Windows-虚拟机" class="headerlink" title="在 Azure 中创建 Windows 虚拟机"></a>在 Azure 中创建 Windows 虚拟机</h3><p>其实在 Azure 中创建 Windows VM 与 Linux VM 区别不是很大，首先选择的映像应该是 Windows Server， 有多个 Windows Server 版本可供选择。 在 Windows Server 映像概述面板中，单击“选择软件计划”下拉列表，并找到“Windows Server 2019 Datacenter”选项。</p>
+<h4 id="配置网络"><a href="#配置网络" class="headerlink" title="配置网络"></a>配置网络</h4><p>在网络部分可能需要一些额外的配置</p>
+<ol>
+<li>生产系统中已有其他组件，我们希望使用现有的虚拟网络。 这样我们的 VM 就可与解决方案中的其他云服务进行通信。 如果此位置中尚未定义这样的网络，可在此处创建并配置：</li>
+</ol>
+<ul>
+<li>地址空间：此网络可用的整体 IPV4 空间。</li>
+<li>子网范围：首个细分地址空间的子网 - 必须适合定义的地址空间。 创建 VNet 后，就可以添加其他子网。</li>
+</ul>
+<ol start="2">
+<li>让我们来更改默认范围，以使用 <code>172.xxx IP</code> 地址空间。 在“虚拟网络”下单击“新建”。</li>
+</ol>
+<ul>
+<li>将“地址空间”字段更改为 <code>172.16.0.0/16</code>，以便为其提供完整的地址范围</li>
+<li>将“子网范围”字段更改为 <code>172.16.1.0/24</code>，为其提供空间的 256 个 IP 地址。</li>
+</ul>
+<h4 id="使用-RDP-连接到-Windows-Azure-虚拟机"><a href="#使用-RDP-连接到-Windows-Azure-虚拟机" class="headerlink" title="使用 RDP 连接到 Windows Azure 虚拟机"></a>使用 RDP 连接到 Windows Azure 虚拟机</h4><p>远程桌面协议 (RDP) 提供到基于 Windows 的计算机 UI 的远程连接。 使用 RDP，可以登录到远程物理或虚拟 Windows 计算机，并像处于控制台一样控制该计算机。 通过 RDP 连接，可以从物理计算机的控制台执行大部分操作，某些电源和硬件相关的功能除外。</p>
+<p>RDP 连接需要 RDP 客户端。 Microsoft 为以下操作系统提供 RDP 客户端：</p>
+<ul>
+<li>Windows（内置）</li>
+<li>macOS</li>
+<li>iOS</li>
+<li>Android</li>
+</ul>
+<p>我使用的是 Microsoft 官方提供的 MacOS 使用的 Microsoft Remote Desktop 软件。<br>使用 RDP 连接到 Azure 中的 VM 是一个简单的过程。 在 Azure 门户中，转到 VM 的属性，然后单击顶部的“连接”。 这会显示分配到 VM 的 IP 地址，并可选择下载 Windows 稍后在 RDP 客户端中打开的 preconfigured.rdp 文件。<br>下载之后使用 Microsoft Remote Desktop 打开 rdp 文件就可以进行远程连接</p>
+<h4 id="初始化数据磁盘-1"><a href="#初始化数据磁盘-1" class="headerlink" title="初始化数据磁盘"></a>初始化数据磁盘</h4><p>同样的，新创建的 Windows VM 也需要进行数据磁盘的初始化。</p>
+<p>将需要初始化和格式化从头开始创建的任何其他驱动器。 执行此操作的过程与对物理驱动器执行的操作过程相同。</p>
+<ol>
+<li><p>从“开始”菜单启动“磁盘管理”工具。 你可能需要先转到计算机管理工具，然后转到“磁盘管理”，或尝试在“开始”菜单中搜索“磁盘管理”。</p>
+</li>
+<li><p>此时会显示一条警告，指示检测到未初始化的磁盘。</p>
+</li>
+<li><p>单击“确定”初始化该磁盘。 该磁盘随即显示在卷列表中，可将其格式化并分配驱动器号。</p>
+</li>
+<li><p>打开文件资源管理器，此时应会看到数据驱动器。</p>
+</li>
+<li><p>继续操作并关闭 RDP 客户端，以从 VM 注销。 服务器将继续运行。</p>
+</li>
+</ol>
+<h5 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h5><p>内容均来自Microsoft官方文档<a href="https://docs.microsoft.com/" target="_blank" rel="noopener">Azure</a>）</p>
+]]></content>
+      <categories>
+        <category>Azure</category>
+      </categories>
+      <tags>
+        <tag>Azure</tag>
+        <tag>云计算</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Azure 体系结构和服务保证</title>
     <url>/2020/07/14/Azure-%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E5%92%8C%E6%9C%8D%E5%8A%A1%E4%BF%9D%E8%AF%81/</url>
     <content><![CDATA[<h3 id="Azure基础知识：核心云服务"><a href="#Azure基础知识：核心云服务" class="headerlink" title="Azure基础知识：核心云服务"></a>Azure基础知识：核心云服务</h3><a id="more"></a>
