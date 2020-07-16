@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="SpringSecurity," />
+  <meta name="keywords" content="Azure,云计算," />
 
 
 
@@ -86,16 +86,17 @@
 
 
 
-<meta name="description" content="SpringSecurity登录表单配置">
+<meta name="description" content="使用 CLI 控制 Azure 服务">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SpringSecurity登录表单配置">
-<meta property="og:url" content="https://kaciner.github.io/2020/01/07/SpringSecurity%E7%99%BB%E5%BD%95%E8%A1%A8%E5%8D%95%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:title" content="MacOS 下的 Azure Cli">
+<meta property="og:url" content="https://kaciner.github.io/2020/07/16/MacOS-%E4%B8%8B%E7%9A%84-Azure-Cli/index.html">
 <meta property="og:site_name" content="风之旅人">
-<meta property="og:description" content="SpringSecurity登录表单配置">
-<meta property="article:published_time" content="2020-01-07T14:20:25.000Z">
-<meta property="article:modified_time" content="2020-01-07T15:23:44.393Z">
+<meta property="og:description" content="使用 CLI 控制 Azure 服务">
+<meta property="article:published_time" content="2020-07-16T03:39:19.000Z">
+<meta property="article:modified_time" content="2020-07-16T05:43:20.778Z">
 <meta property="article:author" content="风之旅人">
-<meta property="article:tag" content="SpringSecurity">
+<meta property="article:tag" content="Azure">
+<meta property="article:tag" content="云计算">
 <meta name="twitter:card" content="summary">
 
 
@@ -126,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="https://kaciner.github.io/2020/01/07/SpringSecurity登录表单配置/"/>
+  <link rel="canonical" href="https://kaciner.github.io/2020/07/16/MacOS-下的-Azure-Cli/"/>
 
 
 
 
 
-  <title>SpringSecurity登录表单配置 | 风之旅人</title>
+  <title>MacOS 下的 Azure Cli | 风之旅人</title>
   
 
 
@@ -293,7 +294,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kaciner.github.io/2020/01/07/SpringSecurity%E7%99%BB%E5%BD%95%E8%A1%A8%E5%8D%95%E9%85%8D%E7%BD%AE/">
+    <link itemprop="mainEntityOfPage" href="https://kaciner.github.io/2020/07/16/MacOS-%E4%B8%8B%E7%9A%84-Azure-Cli/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="风之旅人">
@@ -310,7 +311,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">SpringSecurity登录表单配置</h1>
+          <h1 class="post-title" itemprop="name headline">MacOS 下的 Azure Cli</h1>
         
 
         <div class="post-meta">
@@ -322,8 +323,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-07T22:20:25+08:00">
-                2020-01-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-16T11:39:19+08:00">
+                2020-07-16
               </time>
             
 
@@ -345,8 +346,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SpringSecurity/" itemprop="url" rel="index">
-                    <span itemprop="name">SpringSecurity</span>
+                  <a href="/categories/%E4%BA%91%E8%AE%A1%E7%AE%97/" itemprop="url" rel="index">
+                    <span itemprop="name">云计算</span>
                   </a>
                 </span>
 
@@ -376,7 +377,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  671
+                  1.9k
                 </span>
               
 
@@ -392,7 +393,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  7
                 </span>
               
             </div>
@@ -413,18 +414,103 @@
       
 
       
-        <h3 id="SpringSecurity登录表单配置"><a href="#SpringSecurity登录表单配置" class="headerlink" title="SpringSecurity登录表单配置"></a>SpringSecurity登录表单配置</h3><a id="more"></a>
-<h4 id="SpringSecurity"><a href="#SpringSecurity" class="headerlink" title="SpringSecurity"></a>SpringSecurity</h4><h5 id="1-登录成功"><a href="#1-登录成功" class="headerlink" title="1.登录成功"></a>1.登录成功</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">(HttpSecurity http)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">     http.authorizeRequests()</span><br><span class="line">     .and()</span><br><span class="line">     .formLogin()</span><br><span class="line">     .usernameParameter(<span class="string">"username"</span>)</span><br><span class="line">     .passwordParameter(<span class="string">"password"</span>)</span><br><span class="line">     .loginProcessingUrl(<span class="string">"/doLogin"</span>)</span><br><span class="line">     .loginPage(<span class="string">"/login"</span>)</span><br><span class="line">     <span class="comment">/*</span></span><br><span class="line"><span class="comment">     登录成功的回调</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">     .successHandler(<span class="keyword">new</span> AuthenticationSuccessHandler() &#123;</span><br><span class="line">         <span class="meta">@Override</span></span><br><span class="line">         <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAuthenticationSuccess</span><span class="params">(HttpServletRequest req, HttpServletResponse resp, Authentication authentication)</span></span></span><br><span class="line"><span class="function">                 <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">                 resp.setContentType(<span class="string">"application/json;charset=utf-8"</span>);</span><br><span class="line">                 PrintWriter out = resp.getWriter();</span><br><span class="line">                 Map&lt;String, Object&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">                 map.put(<span class="string">"status"</span>, <span class="number">200</span>);</span><br><span class="line">                 map.put(<span class="string">"msg"</span>, authentication.getPrincipal());</span><br><span class="line">                 out.write(<span class="keyword">new</span> ObjectMapper().writeValueAsString(map));</span><br><span class="line">                 out.flush();</span><br><span class="line">                 out.close();</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;)</span><br></pre></td></tr></table></figure>
-<h5 id="2-登录失败"><a href="#2-登录失败" class="headerlink" title="2.登录失败"></a>2.登录失败</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">.failureHandler(<span class="keyword">new</span> AuthenticationFailureHandler() &#123;</span><br><span class="line">               <span class="meta">@Override</span></span><br><span class="line">               <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAuthenticationFailure</span><span class="params">(HttpServletRequest req, HttpServletResponse resp, AuthenticationException exception)</span></span></span><br><span class="line"><span class="function">                       <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">                           resp.setContentType(<span class="string">"application/json;charset=utf-8"</span>);</span><br><span class="line">                           PrintWriter out = resp.getWriter();</span><br><span class="line">                           Map&lt;String, Object&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">                           map.put(<span class="string">"status"</span>, <span class="number">401</span>);</span><br><span class="line">                           <span class="keyword">if</span>(exception <span class="keyword">instanceof</span> LockedException)&#123;</span><br><span class="line">                               map.put(<span class="string">"msg"</span>, <span class="string">"账户被锁定，请联系管理员!"</span>);</span><br><span class="line">                           &#125; <span class="keyword">else</span> <span class="keyword">if</span>(exception <span class="keyword">instanceof</span> CredentialsExpiredException)&#123;</span><br><span class="line">                               map.put(<span class="string">"msg"</span>, <span class="string">"密码过期，请联系管理员!"</span>);</span><br><span class="line">                           &#125; <span class="keyword">else</span> <span class="keyword">if</span>(exception <span class="keyword">instanceof</span> AccountExpiredException)&#123;</span><br><span class="line">                               map.put(<span class="string">"msg"</span>, <span class="string">"账户过期，请联系管理员!"</span>);</span><br><span class="line">                           &#125; <span class="keyword">else</span> <span class="keyword">if</span>(exception <span class="keyword">instanceof</span> DisabledException)&#123;</span><br><span class="line">                               map.put(<span class="string">"msg"</span>, <span class="string">"账户被禁用，请联系管理员!"</span>);</span><br><span class="line">                           &#125; <span class="keyword">else</span> <span class="keyword">if</span>(exception <span class="keyword">instanceof</span> BadCredentialsException)&#123;</span><br><span class="line">                               map.put(<span class="string">"msg"</span>, <span class="string">"用户名或者密码输入错误，请重新输入!"</span>);</span><br><span class="line">                           &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">                           	map.put(<span class="string">"msg"</span>, <span class="string">"登录失败!"</span>)</span><br><span class="line">                           &#125; </span><br><span class="line">                           out.write(<span class="keyword">new</span> ObjectMapper().writeValueAsString(map));</span><br><span class="line">                           out.flush();</span><br><span class="line">                           out.close();</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;)</span><br></pre></td></tr></table></figure>
-<h5 id="3-注销"><a href="#3-注销" class="headerlink" title="3.注销"></a>3.注销</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">.logout()</span><br><span class="line">.logoutUrl(<span class="string">"/logout"</span>)</span><br><span class="line">            .logoutSuccessHandler(<span class="keyword">new</span> LogoutSuccessHandler() &#123;</span><br><span class="line">                <span class="meta">@Override</span></span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onLogoutSuccess</span><span class="params">(HttpServletRequest req, HttpServletResponse resp, Authentication authentication)</span> <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">                    resp.setContentType(<span class="string">"application/json;charset=utf-8"</span>);</span><br><span class="line">                    PrintWriter out = resp.getWriter();</span><br><span class="line">                    Map&lt;String, Object&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">                    map.put(<span class="string">"status"</span>, <span class="number">200</span>);</span><br><span class="line">                    map.put(<span class="string">"msg"</span>, <span class="string">"注销成功!"</span>)</span><br><span class="line">                    out.write(<span class="keyword">new</span> ObjectMapper().writeValueAsString(map));</span><br><span class="line">                    out.flush();</span><br><span class="line">                    out.close();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">            .permitAll()</span><br><span class="line">            .and()</span><br><span class="line">            .csrf().disable().exceptionHandling()</span><br></pre></td></tr></table></figure>
-<h5 id="4-方法安全"><a href="#4-方法安全" class="headerlink" title="4.方法安全"></a>4.方法安全</h5><p>SpringSecurity中默认默认禁用注解，要想开启注解，需要在继承WebSecurityConfigurerAdapter的类上加@EnableGlobalMethodSecurity注解，并在该类中将AuthenticationManager定义为bean。<br>在SpringSecurity配置类上加上注解<code>@EnableGlobalMethodSecurity</code><br>里面有几个属性:</p>
+        <h3 id="使用-CLI-控制-Azure-服务"><a href="#使用-CLI-控制-Azure-服务" class="headerlink" title="使用 CLI 控制 Azure 服务"></a>使用 CLI 控制 Azure 服务</h3><a id="more"></a>
+<h4 id="什么是-Azure-CLI？"><a href="#什么是-Azure-CLI？" class="headerlink" title="什么是 Azure CLI？"></a>什么是 Azure CLI？</h4><p>Azure CLI 是一个命令行程序，可连接到 Azure 并对 Azure 资源执行管理命令。 它在 Linux、macOS 和 Windows 上运行，并允许管理员和开发人员通过终端或命令行提示符（或脚本！）而不是 Web 浏览器执行命令。 例如，要重启虚拟机 (VM)，可使用如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">az vm restart -g MyResourceGroup -n MyVm</span><br></pre></td></tr></table></figure>
+
+<p>Azure CLI 提供用于管理 Azure 资源的跨平台命令行工具，可以在 Linux、Mac 或 Windows 计算机上本地安装。 此外，可以从浏览器中通过 Azure Cloud Shell 使用 Azure CLI。 通过这两种方式，均可以交互方式或编写脚本的方式使用 Azure CLI。 若要以交互方式使用，请先在 Windows 上启动 cmd.exe 等 shell 或是在 Linux 或 macOS 上启动 Bash，然后在 shell 提示符处发出命令。 若要自动执行重复性任务，请使用所选 shell 的脚本语法将 CLI 命令配置到 shell 脚本中，然后执行该脚本。</p>
+<h4 id="如何安装-Azure-CLI"><a href="#如何安装-Azure-CLI" class="headerlink" title="如何安装 Azure CLI"></a>如何安装 Azure CLI</h4><p>在 Linux 和 macOS 上，均使用包管理器安装 Azure CLI。 建议使用的包管理器因 OS 和分发而异：</p>
+<p>Linux：Ubuntu 上的 apt-geton、Red Hat 上的 yum 和 OpenSUSE 上的 zypper<br>Mac：Homebrew<br>Microsoft 存储库中提供 Azure CLI，因此需要先将该存储库添加到包管理器中。</p>
+<p>在 Windows 上，可通过下载并运行 MSI 文件安装 Azure CLI。</p>
+<p>Azure CLI 的当前版本为 2.8.0。 有关最新版本的信息，请参阅发行说明。 若要查找你已安装的版本并查看是否需要更新，请运行 az –version。</p>
+<h4 id="使用-Homebrew-安装"><a href="#使用-Homebrew-安装" class="headerlink" title="使用 Homebrew 安装"></a>使用 Homebrew 安装</h4><p>Homebrew 是管理 CLI 安装的最容易的方法。 它可以方便地进行安装、更新和卸载。 如果系统中没有可用的 Homebrew，请先安装 Homebrew，然后继续。<br>安装 CLI 时，可以先更新 brew 存储库信息，然后运行 install 命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew update &amp;&amp; brew install azure-cli</span><br></pre></td></tr></table></figure>
+
+<p>然后即可使用 <code>az</code> 命令来运行 Azure CLI。 若要登录，请使用 <code>az login</code> 命令。<br>运行 <code>login</code> 命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">az login</span><br></pre></td></tr></table></figure>
+
+<p>如果 CLI 可以打开默认浏览器，它将这样做并加载 Azure 登录页。<br>否则，请在 <a href="https://aka.ms/devicelogin" target="_blank" rel="noopener">https://aka.ms/devicelogin</a> 处打开浏览器页，然后输入终端中显示的授权代码。</p>
+<h5 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h5><p>CLI 定期使用 Bug 修复、改进、新功能和预览版功能进行更新。 新版本大约两周发布一次。 更新本地存储库信息，然后升级 azure-cli 包。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew update &amp;&amp; brew upgrade azure-cli</span><br></pre></td></tr></table></figure>
+
+<h5 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h5><p>使用 Homebrew 卸载 azure-cli 包。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew uninstall azure-cli</span><br></pre></td></tr></table></figure>
+
+<h4 id="国区环境下的-Azure-CLI"><a href="#国区环境下的-Azure-CLI" class="headerlink" title="国区环境下的 Azure CLI"></a>国区环境下的 Azure CLI</h4><p>首先使用命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">az cloud <span class="built_in">set</span> --name AzureChinaCloud</span><br></pre></td></tr></table></figure>
+
+<p>将azure切换到中国区，然后使用 <code>az login</code> 命令进行登录，即可跳转到国区登录界面。</p>
+<h4 id="使用-Azure-CLI-可以管理哪些-Azure-资源？"><a href="#使用-Azure-CLI-可以管理哪些-Azure-资源？" class="headerlink" title="使用 Azure CLI 可以管理哪些 Azure 资源？"></a>使用 Azure CLI 可以管理哪些 Azure 资源？</h4><p>通过 Azure CLI，几乎可以控制每个 Azure 资源的各个方面。 可以使用资源组、存储、虚拟机、Azure Active Directory (Azure AD)、容器、机器学习等。</p>
+<p>CLI 中的命令由<em>组</em>和_子组_构成。 每个组表示由 Azure 提供的一个服务，而子组将这些服务的命令划分为逻辑分组。 例如，<code>storage</code> 组包含多个子组，包括“account”、“blob”和“queue”。</p>
+<p>那么，如何找到所需的特定命令？ 一种方法是使用 az find，AI 机器人将使用 Azure 文档来告诉你有关命令、CLI 等的更多信息。</p>
+<p>示例 - 查找与“BLOB”一词相关的最常用命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">az find blob</span><br></pre></td></tr></table></figure>
+
+<p>示例 - 向我显示 Azure CLI 命令组的最常用命令，如 az vm。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">az find <span class="string">"az vm"</span></span><br></pre></td></tr></table></figure>
+
+<p>示例 - 向我显示 Azure CLI 命令的最常用参数和子命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">az find <span class="string">"az vm create"</span></span><br></pre></td></tr></table></figure>
+
+<p>如果已经知道所需命令的名称，该命令的 –help 参数将提供有关该命令的更多详细信息；而对于命令组，将提供可用子命令的列表。 因此，在我们的存储示例中，可按如下方式获取用于管理 blob 存储的子组和命令列表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">az storage blob --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="如何创建-Azure-资源"><a href="#如何创建-Azure-资源" class="headerlink" title="如何创建 Azure 资源"></a>如何创建 Azure 资源</h4><p>创建新的 Azure 资源通常分为三个步骤：连接到 Azure 订阅、创建资源以及验证创建是否成功。</p>
+<h5 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h5><p>由于正在使用 Azure CLI 的本地安装，因此在执行 Azure 命令之前，需要使用 Azure CLI“login”命令进行身份验证。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">az login</span><br></pre></td></tr></table></figure>
+
+<p>Azure CLI 通常会启动默认浏览器打开 Azure 登录页面。 如果不起作用，请按照命令行说明操作，并在 <a href="https://aka.ms/devicelogin" target="_blank" rel="noopener">https://aka.ms/devicelogin</a> 中输入授权码。</p>
+<p>成功登录后，将连接到 Azure 订阅。</p>
+<h5 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h5><p>由于在创建新的 Azure 服务之前，通常需要创建新的资源组，因此我们将使用资源组作为示例来说明如何从 CLI 创建 Azure 资源。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">az group create --name &lt;name&gt; --location &lt;location&gt;</span><br></pre></td></tr></table></figure>
+
+<p>例：<code>az group create --name kaciner --location chinanorth</code></p>
+<h5 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h5><p>对于许多 Azure 资源，Azure CLI 提供了“list”子命令来查看资源详细信息。 例如，Azure CLI“group list”命令列出了 Azure 资源组。 这对于验证资源组是否成功创建非常有用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">az group list</span><br></pre></td></tr></table></figure>
+
+<p>若要获得更简洁的视图，可将输出的格式设为简单的表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">az group list --output table</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用资源组"><a href="#使用资源组" class="headerlink" title="使用资源组"></a>使用资源组</h4><h5 id="本例使用-Azure-Cloud-Shell-中的沙盒模式"><a href="#本例使用-Azure-Cloud-Shell-中的沙盒模式" class="headerlink" title="本例使用 Azure Cloud Shell 中的沙盒模式"></a>本例使用 Azure Cloud Shell 中的沙盒模式</h5><p>使用资源组<br>当你使用自己的计算机和 Azure 订阅时，首先需要使用 <code>az login</code> 命令登录到 Azure。 但是，使用基于浏览器的 Cloud Shell 环境时，并非必须进行登录。</p>
+<p>接下来，你通常会使用 <code>az group create</code> 命令为所有相关 Azure 资源创建资源组；在本练习中，已为你创建以下资源组：learn-dbf33586-b4a8-4d94-84c5-25b748b07f12。</p>
 <ol>
-<li>prePostEnable注解: <code>@EnableGlobalMethodSecurity(prePostEnabled = true)</code></li>
-<li>@PreAuthorize：在方法执行前判断，可以调用方法参数，主要利用Java8的参数名反射特性，如果没用Java8也可以使用spring security的@P标注参数，或者Spring Data的@Param标注参数。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//判断用户是否为当前登录用户或拥有ROLE_ADMIN权限</span></span><br><span class="line"><span class="meta">@PreAuthorize</span>(<span class="string">"#userId == authentication.principal.userId or hasAuthority(‘ADMIN’)"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">changePassword</span><span class="params">(@P(<span class="string">"userId"</span>)</span> <span class="keyword">long</span> userId )</span>&#123;&#125;</span><br></pre></td></tr></table></figure></li>
-<li>@PostAuthorize：在方法执行后判断，可以调用参数。如果EL为false，虽然方法已经执行完了也可能会回滚，EL变量returnObject表示返回的对象。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PostAuthorize</span></span><br><span class="line"><span class="function">User <span class="title">getUser</span><span class="params">(<span class="string">"returnObject.userId == authentication.principal.userId or hasPermission(returnObject, 'ADMIN')"</span>)</span></span>;</span><br></pre></td></tr></table></figure></li>
-<li>@PreFilter:在方法执行前判断，可以调用方法参数，对参数值进行过滤、处理或修改。EL变量filterObject表示参数，如有多个参数则用filterTarget注解参数，那么参数必须是集合或数组才行（很少用到，与分页技术不兼容）。</li>
-<li>securedEnable注解: @Secured:是否有权限访问 <code>@EnableGlobalMethodSecurity(securedEnabled = true)</code><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Secured(<span class="meta-string">"IS_AUTHENTICATED_ANONYMOUSLY"</span>)</span> <span class="keyword">public</span> Account readAccount(<span class="built_in">Long</span> id);</span><br><span class="line"><span class="meta">@Secured(<span class="meta-string">"ROLE_TELLER"</span>)</span></span><br></pre></td></tr></table></figure></li>
+<li>本练习中的第一步是创建几个要在稍后命令中使用的变量。</li>
 </ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> RESOURCE_GROUP=learn-dbf33586-b4a8-4d94-84c5-25b748b07f12</span><br><span class="line"><span class="built_in">export</span> AZURE_REGION=centralus</span><br><span class="line"><span class="built_in">export</span> AZURE_APP_PLAN=popupappplan-<span class="variable">$RANDOM</span></span><br><span class="line"><span class="built_in">export</span> AZURE_WEB_APP=popupwebapp-<span class="variable">$RANDOM</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>可以要求 Azure CLI 在表中列出所有资源组。 当你在免费 Azure 沙盒中时，应该只有一个资源组。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">az group list --output table</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>随着你完成更多 Azure 开发，可能会生成多个资源组。 如果组列表中有多个项，则可以通过添加 –query 选项来筛选返回值。 请尝试以下命令：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">az group list --query <span class="string">"[?name == '<span class="variable">$RESOURCE_GROUP</span>']"</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="创建服务计划的步骤"><a href="#创建服务计划的步骤" class="headerlink" title="创建服务计划的步骤"></a>创建服务计划的步骤</h4><ol>
+<li>创建应用服务计划以运行应用。 下述命令指定了免费定价层，但你可运行 az appservice plan create –help 来查看其他定价层。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">az appservice plan create --name <span class="variable">$AZURE_APP_PLAN</span> --resource-group <span class="variable">$RESOURCE_GROUP</span> --location <span class="variable">$AZURE_REGION</span> --sku FREE</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">此命令可能需要几分钟才能完成。</span><br><span class="line"></span><br><span class="line">2. 通过在表中列出所有计划来验证是否已成功创建该服务计划。</span><br><span class="line"></span><br><span class="line">``` Bash</span><br><span class="line">az appservice plan list --output table</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建-Web-应用的步骤"><a href="#创建-Web-应用的步骤" class="headerlink" title="创建 Web 应用的步骤"></a>创建 Web 应用的步骤</h4><p>接下来，你将在服务计划中创建 Web 应用。 可同时部署代码，但在本例中，我们将在单独的步骤中分别创建 Web 应用和部署代码。</p>
+<ol>
+<li>要创建 Web 应用，需提供 Web 应用名称以及在前面创建的应用计划的名称。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">az webapp create --name <span class="variable">$AZURE_WEB_APP</span> --resource-group <span class="variable">$RESOURCE_GROUP</span> --plan <span class="variable">$AZURE_APP_PLAN</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>通过在表中列出所有应用来验证是否已成功创建该应用。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">az webapp list --output table</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>你的站点有一个由 Azure 创建的“快速入门”页，你可以在浏览器中或使用 CURL（只需使用 DefaultHostName 即可）查看它：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl <span class="variable">$AZURE_WEB_APP</span>.azurewebsites.net</span><br></pre></td></tr></table></figure>
+
+<p>你将看到返回的示例应用的默认 HTML。</p>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><p>内容均来自<a href="https://docs.microsoft.com/" target="_blank" rel="noopener">Microsoft官方文档</a></p>
 
       
     </div>
@@ -442,7 +528,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/SpringSecurity/" rel="tag"><i class="fa fa-tag"></i> SpringSecurity</a>
+            <a href="/tags/Azure/" rel="tag"><i class="fa fa-tag"></i> Azure</a>
+          
+            <a href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/" rel="tag"><i class="fa fa-tag"></i> 云计算</a>
           
         </div>
       
@@ -455,8 +543,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/01/05/SpringSecurity%E5%9F%BA%E7%A1%80/" rel="next" title="SpringSecurity基础">
-                <i class="fa fa-chevron-left"></i> SpringSecurity基础
+              <a href="/2020/07/15/%E5%85%B3%E4%BA%8E%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="next" title="关于计算机网络的基础知识">
+                <i class="fa fa-chevron-left"></i> 关于计算机网络的基础知识
               </a>
             
           </div>
@@ -464,10 +552,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/02/03/Vue-cli%E6%9E%84%E5%BB%BAVue%E9%A1%B9%E7%9B%AE/" rel="prev" title="Vue-cli构建Vue项目">
-                Vue-cli构建Vue项目 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -615,7 +699,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#SpringSecurity登录表单配置"><span class="nav-number">1.</span> <span class="nav-text">SpringSecurity登录表单配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SpringSecurity"><span class="nav-number">1.1.</span> <span class="nav-text">SpringSecurity</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-登录成功"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.登录成功</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-登录失败"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.登录失败</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-注销"><span class="nav-number">1.1.3.</span> <span class="nav-text">3.注销</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-方法安全"><span class="nav-number">1.1.4.</span> <span class="nav-text">4.方法安全</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-CLI-控制-Azure-服务"><span class="nav-number">1.</span> <span class="nav-text">使用 CLI 控制 Azure 服务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是-Azure-CLI？"><span class="nav-number">1.1.</span> <span class="nav-text">什么是 Azure CLI？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何安装-Azure-CLI"><span class="nav-number">1.2.</span> <span class="nav-text">如何安装 Azure CLI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用-Homebrew-安装"><span class="nav-number">1.3.</span> <span class="nav-text">使用 Homebrew 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#更新"><span class="nav-number">1.3.1.</span> <span class="nav-text">更新</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#卸载"><span class="nav-number">1.3.2.</span> <span class="nav-text">卸载</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#国区环境下的-Azure-CLI"><span class="nav-number">1.4.</span> <span class="nav-text">国区环境下的 Azure CLI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用-Azure-CLI-可以管理哪些-Azure-资源？"><span class="nav-number">1.5.</span> <span class="nav-text">使用 Azure CLI 可以管理哪些 Azure 资源？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何创建-Azure-资源"><span class="nav-number">1.6.</span> <span class="nav-text">如何创建 Azure 资源</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#连接"><span class="nav-number">1.6.1.</span> <span class="nav-text">连接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#创建"><span class="nav-number">1.6.2.</span> <span class="nav-text">创建</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#验证"><span class="nav-number">1.6.3.</span> <span class="nav-text">验证</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用资源组"><span class="nav-number">1.7.</span> <span class="nav-text">使用资源组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#本例使用-Azure-Cloud-Shell-中的沙盒模式"><span class="nav-number">1.7.1.</span> <span class="nav-text">本例使用 Azure Cloud Shell 中的沙盒模式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建服务计划的步骤"><span class="nav-number">1.8.</span> <span class="nav-text">创建服务计划的步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建-Web-应用的步骤"><span class="nav-number">1.9.</span> <span class="nav-text">创建 Web 应用的步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他"><span class="nav-number">1.10.</span> <span class="nav-text">其他</span></a></li></ol></li></ol></div>
             
 
           </div>
