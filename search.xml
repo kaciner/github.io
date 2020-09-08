@@ -1,6 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Spring Cloud 中使用 Consul</title>
+    <url>/2020/08/31/Spring-Cloud%E4%B8%AD%E4%BD%BF%E7%94%A8Consul/</url>
+    <content><![CDATA[<h3 id="Spring-Cloud-中使用-Consul"><a href="#Spring-Cloud-中使用-Consul" class="headerlink" title="Spring Cloud 中使用 Consul"></a>Spring Cloud 中使用 Consul</h3><a id="more"></a>
+<h4 id="什么是-Consul？"><a href="#什么是-Consul？" class="headerlink" title="什么是 Consul？"></a>什么是 Consul？</h4><p>Consul是一个服务管理软件。支持多数据中心下，分布式高可用的，服务发现和配置共享。采用 Raft 算法,用来保证服务的高可用。</p>
+<h4 id="MacOS-安装-Consul"><a href="#MacOS-安装-Consul" class="headerlink" title="MacOS 安装 Consul"></a>MacOS 安装 Consul</h4><p>Consul和Eureka不同，Eureka只需要在项目中加入服务端依赖，就可以作为服务端使用；Consul需要从官网下载，并单独安装。</p>
+<p>官网下载地址：<a href="https://www.consul.io/downloads.html" target="_blank" rel="noopener">https://www.consul.io/downloads.html</a></p>
+<p>将解压后的文件 Consul  拷贝到/usr/local/bin下sudo cp consul /usr/local/bin</p>
+<p>打开bin文件，执行 Consul， 在终端执行：consul agent -dev，启动consul</p>
+<p>浏览器输入：<a href="http://localhost:8500" target="_blank" rel="noopener"></a> 进入 Consul 界面</p>
+<p>tips: 各参数含义</p>
+<p>-agent：Consul的核心命令，主要作用有维护成员信息、运行状态检测、声明服务以及处理请求等<br>-server：就是代表server模式<br>-ui：代表开启web 控制台<br>-bootstrap-expect：代表想要创建的集群数目，官方建议3或者5<br>-data-dir：数据存储目录<br>-node：代表当前node的名称<br>-client：应该是一个客户端服务注册的地址，可以和当前server的一致也可以是其他主机地址，系统默认是127.0.0.1<br>-bind：集群通讯地址<br>-join：加入的集群地址</p>
+<h4 id="在-Spring-Cloud-项目中使用-Consul"><a href="#在-Spring-Cloud-项目中使用-Consul" class="headerlink" title="在 Spring Cloud 项目中使用 Consul"></a>在 Spring Cloud 项目中使用 Consul</h4><ol>
+<li>添加依赖</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-actuator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-consul-discovery<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>配置文件</li>
+</ol>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring.application.name</span>=consul-provider</span><br><span class="line"><span class="attr">server.port</span>=<span class="number">2000</span></span><br><span class="line"></span><br><span class="line"><span class="attr">spring.cloud.consul.host</span>=<span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">spring.cloud.consul.port</span>=<span class="number">8500</span></span><br><span class="line"><span class="attr">spring.cloud.consul.discovery.service-name</span>=consul-provider</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>添加一个测试接口</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/hello"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">Hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"hello world"</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><p>启动类加注解</p>
+<p> 启动类上面加上<code>@EnableDiscoveryClient</code>注解， 开启服务发现的功能。</p>
+</li>
+<li><p>启动项目</p>
+<p> <a href="http://localhost:8500" target="_blank" rel="noopener"></a> 打开管理页面查看已注册的服务</p>
+</li>
+<li><p>Tips</p>
+<p> Spring Cloud 向 Consul 注册服务时，显示 Unhealthy Nodes（不健康的节点），如图：</p>
+</li>
+</ol>
+<img src="/2020/08/31/Spring-Cloud%E4%B8%AD%E4%BD%BF%E7%94%A8Consul/WX20200831-172916@2x.png" class>
+
+<p>需要在配置文件中加如下配置</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">spring<span class="selector-class">.cloud</span><span class="selector-class">.consul</span><span class="selector-class">.discovery</span><span class="selector-class">.heartbeat</span>.enabled=true</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Spring Cloud</category>
+      </categories>
+      <tags>
+        <tag>Spring Cloud</tag>
+        <tag>Consul</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MacOS 下的 Azure Cli</title>
     <url>/2020/07/16/MacOS-%E4%B8%8B%E7%9A%84-Azure-Cli/</url>
     <content><![CDATA[<h3 id="使用-CLI-控制-Azure-服务"><a href="#使用-CLI-控制-Azure-服务" class="headerlink" title="使用 CLI 控制 Azure 服务"></a>使用 CLI 控制 Azure 服务</h3><a id="more"></a>
